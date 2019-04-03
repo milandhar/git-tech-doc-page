@@ -132,22 +132,131 @@
         </article>
       </section>
 
-      <section class = "main-section">
+      <section class = "main-section" id = "undoing_things">
         <header>
-
+          Undoing Things
         </header>
+        <article>
+          <p>At any stage, you may want to undo something. Be careful, because you can’t always undo some of these undos. This is one of the few areas in Git where you may lose some work if you do it wrong.</p>
+
+          <p>One of the common undos takes place when you commit too early and possibly forget to add some files, or you mess up your commit message. If you want to redo that commit, make the additional changes you forgot, stage them, and commit again using the <code>--amend</code> option:</p>
+          <code>$ git commit --amend</code>
+          <p>As an example, if you commit and then realize you forgot to stage the changes in a file you wanted to add to this commit, you can do something like this:</p>
+          <code>
+            $ git commit -m 'initial commit'
+            $ git add forgotten_file
+            $ git commit --amend
+          </code>
+
+        </article>
       </section>
 
-      <section class = "main-section">
+      <section class = "main-section" id = "showing_remotes">
         <header>
-
+          Showing Your Remotes
         </header>
+        <article>
+          <p>To see which remote servers you have configured, you can run the <code>git remote</code> command. It lists the shortnames of each remote handle you’ve specified. If you’ve cloned your repository, you should at least see <code>origin</code> — that is the default name Git gives to the server you cloned from</p>
+        </article>
       </section>
 
-      <section class = "main-section">
+      <section class = "main-section" id = "fetching_pulling_from_remotes">
         <header>
-
+          Fetching and Pulling from Your Remotes
         </header>
+        <article>
+          <p>To get data from your remote projects, you can run:</p>
+          <code>$ git fetch &lt;remote&gt;</code>
+          <p>The command goes out to that remote project and pulls down all the data from that remote project that you don’t have yet. After you do this, you should have references to all the branches from that remote, which you can merge in or inspect at any time.</p>
+          <p>If you clone a repository, the command automatically adds that remote repository under the name “origin”. So, <code>git fetch origin</code> fetches any new work that has been pushed to that server since you cloned (or last fetched from) it. It’s important to note that the <code>git fetch</code> command only downloads the data to your local repository — it doesn’t automatically merge it with any of your work or modify what you’re currently working on. You have to merge it manually into your work when you’re ready.</p>
+          <p>If your current branch is set up to track a remote branch, you can use the <code>git pull</code> command to automatically fetch and then merge that remote branch into your current branch.</p>
+        </article>
+      </section>
+
+      <section class = "main-section" id = "pushing_to_remotes">
+        <header>
+          Pushing to Your Remotes
+        </header>
+        <article>
+          <p>When you have your project at a point that you want to share, you have to push it upstream. The command for this is simple: <code>git push &lt;remote&gt; &lt;branch&gt;</code>. If you want to push your master branch to your origin server (again, cloning generally sets up both of those names for you automatically), then you can run this to push any commits you’ve done back up to the server:</p>
+          <code>$ git push origin master</code>
+        </article>
+      </section>
+
+      <section class = "main-section" id = "creating_new_branch">
+        <header>
+          Creating a New Branch
+        </header>
+        <article>
+          <img src="https://git-scm.com/book/en/v2/images/commits-and-parents.png" alt="Commits and their parents">
+          <p>A branch in Git is simply a lightweight movable pointer to one of these commits. The default branch name in Git is master. As you start making commits, you’re given a master branch that points to the last commit you made. Every time you commit, the master branch pointer moves forward automatically.</p>
+          <img src="https://git-scm.com/book/en/v2/images/branch-and-history.png" alt="A branch and its commit history">
+          <p>What happens when you create a new branch? Well, doing so creates a new pointer for you to move around. Let’s say you want to create a new branch called testing. You do this with the <code>git branch</code> command:</p>
+          <code>$ git branch testing</code>
+          <p>How does Git know what branch you’re currently on? It keeps a special pointer called HEAD. Note that this is a lot different than the concept of HEAD in other VCSs you may be used to, such as Subversion or CVS. In Git, this is a pointer to the local branch you’re currently on. In this case, you’re still on master. The git branch command only created a new branch — it didn’t switch to that branch.</p>
+          <img src="https://git-scm.com/book/en/v2/images/head-to-master.png" alt="HEAD pointing to a branch">
+          <p>You can easily see this by running a simple git log command that shows you where the branch pointers are pointing. This option is called --decorate.</p>
+          <code>$ git log --oneline --decorate
+          f30ab (HEAD -> master, testing) add feature #32 - ability to add new formats to the central interface
+          34ac2 Fixed bug #1328 - stack overflow under certain conditions
+          98ca9 The initial commit of my project
+          </code>
+        </article>
+      </section>
+
+      <section class = "main-section" id = "switching_branches">
+        <header>
+          Switching Branches
+        </header>
+        <article>
+          <p>To switch to an existing branch, you run the <code>git checkout</code> command. Let’s switch to the new testing branch:</p>
+          <code>$ git checkout testing</code>
+        </article>
+      </section>
+
+      <section class = "main-section" id = "basic_merging">
+        <header>
+          Basic Merging
+        </header>
+        <article>
+          <p>Suppose you’ve decided that your issue #53 work is complete and ready to be merged into your master branch. In order to do that, you’ll merge your iss53 branch into master, much like you merged your hotfix branch earlier. All you have to do is check out the branch you wish to merge into and then run the <code>git merge</code> command:</p>
+          <code>
+            $ git checkout master
+            Switched to branch 'master'
+            $ git merge iss53
+            Merge made by the 'recursive' strategy.
+            index.html |    1 +
+            1 file changed, 1 insertion(+)
+          </code>
+          <p>This looks a bit different than the hotfix merge you did earlier. In this case, your development history has diverged from some older point. Because the commit on the branch you’re on isn’t a direct ancestor of the branch you’re merging in, Git has to do some work. In this case, Git does a simple three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two.</p>
+            <img src="https://git-scm.com/book/en/v2/images/basic-merging-1.png" alt="Three snapshots used in a typical merge">
+          <p>Instead of just moving the branch pointer forward, Git creates a new snapshot that results from this three-way merge and automatically creates a new commit that points to it. This is referred to as a merge commit, and is special in that it has more than one parent.</p>
+            <img src="https://git-scm.com/book/en/v2/images/basic-merging-2.png" alt="A merge commit">
+        </article>
+      </section>
+
+      <section class = "main-section" id = "basic_merge_conflicts">
+        <header>
+          Basic Merge Conflicts
+        </header>
+        <article>
+        </article>
+      </section>
+
+      <section class = "main-section" id = "basic_merge_conflicts">
+        <header>
+          Basic Merge Conflicts
+        </header>
+        <article>
+        </article>
+      </section>
+
+      <section class = "main-section" id = "basic_merge_conflicts">
+        <header>
+          Basic Merge Conflicts
+        </header>
+        <article>
+        </article>
       </section>
 
     </main>
