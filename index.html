@@ -232,6 +232,10 @@
             <img src="https://git-scm.com/book/en/v2/images/basic-merging-1.png" alt="Three snapshots used in a typical merge">
           <p>Instead of just moving the branch pointer forward, Git creates a new snapshot that results from this three-way merge and automatically creates a new commit that points to it. This is referred to as a merge commit, and is special in that it has more than one parent.</p>
             <img src="https://git-scm.com/book/en/v2/images/basic-merging-2.png" alt="A merge commit">
+            <p>Now that your work is merged in, you have no further need for the iss53 branch. You can close the ticket in your ticket-tracking system, and delete the branch:</p>
+            <code>
+              $ git branch -d iss53
+            </code>
         </article>
       </section>
 
@@ -303,7 +307,6 @@
             #	modified:   index.html
             #
           </code>
-
         </article>
       </section>
 
@@ -312,16 +315,94 @@
           Basic Merge Conflicts
         </header>
         <article>
+          <p>The git branch command does more than just create and delete branches. If you run it with no arguments, you get a simple listing of your current branches:</p>
+          <p>To see the last commit on each branch, you can run git branch -v:</p>
+          <code>
+            $ git branch -v
+            iss53   93b412c fix javascript issue
+          * master  7a98805 Merge branch 'iss53'
+            testing 782fd34 add scott to the author list in the readmes
+          </code>
+          <p>The useful <code>--merged</code> and <code>--no-merged</code> options can filter this list to branches that you have or have not yet merged into the branch you’re currently on. To see which branches are already merged into the branch you’re on, you can run <code>git branch --merged:</code></p>
+          <code>
+            $ git branch --merged
+              iss53
+            * master
+          </code>
+          <p>
+            Because you already merged in iss53 earlier, you see it in your list. Branches on this list without the * in front of them are generally fine to delete with git branch -d; you’ve already incorporated their work into another branch, so you’re not going to lose anything.
+          </p>
+          <p>To see all the branches that contain work you haven’t yet merged in, you can run <code>git branch --no-merged:</code></p>
+          <code>
+            $ git branch --no-merged
+            testing
+          </code>
+          <p>It’s important to remember when you’re doing all this that these branches are completely local. When you’re branching and merging, everything is being done only in your Git repository — there is no communication with the server.</p>
         </article>
       </section>
 
-      <section class = "main-section" id = "basic_merge_conflicts">
-        <header>
-          Basic Merge Conflicts
-        </header>
-        <article>
-        </article>
-      </section>
+
+            <section class = "main-section" id = "remote_branches">
+              <header>
+                Remote Branches
+              </header>
+              <article>
+                <p>Remote-tracking branches are references to the state of remote branches. They’re local references that you can’t move; Git moves them for you whenever you do any network communication, to make sure they accurately represent the state of the remote repository. Think of them as bookmarks, to remind you where the branches in your remote repositories were the last time you connected to them.</p>
+                <p>To synchronize your work with a given remote, you run a <code>git fetch &lt;remote&gt;</code> command (in our case, git fetch origin).</p>
+              </article>
+            </section>
+
+            <section class = "main-section" id = "pushing">
+              <header>
+                Pushing
+              </header>
+              <article>
+                <p>When you want to share a branch with the world, you need to push it up to a remote to which you have write access. Your local branches aren’t automatically synchronized to the remotes you write to — you have to explicitly push the branches you want to share. That way, you can use private branches for work you don’t want to share, and push up only the topic branches you want to collaborate on.</p>
+                <p>If you have a branch named serverfix that you want to work on with others, you can push it up the same way you pushed your first branch. Run git push &lt;remote&gt; &lt;branch&gt;</p>
+              </article>
+            </section>
+
+            <section class = "main-section" id = "tracking_branches">
+              <header>
+                Tracking Branches
+              </header>
+              <article>
+                <p>Checking out a local branch from a remote-tracking branch automatically creates what is called a “tracking branch” (and the branch it tracks is called an “upstream branch”). Tracking branches are local branches that have a direct relationship to a remote branch. If you’re on a tracking branch and type <code>git pull</code>, Git automatically knows which server to fetch from and which branch to merge in.</p>
+                <p>However, you can set up other tracking branches if you wish — ones that track branches on other remotes, or don’t track the master branch. The simple case is the example you just saw, running git <code>checkout -b &lt;branch&gt&lt;remote&gt;/&lt;branch&gt</code>. </p>
+                <p>In fact, this is so common that there’s even a shortcut for that shortcut. If the branch name you’re trying to checkout (a) doesn’t exist and (b) exactly matches a name on only one remote, Git will create a tracking branch for you:</p>
+                <code>
+                  $ git checkout serverfix
+                  Branch serverfix set up to track remote branch serverfix from origin.
+                  Switched to a new branch 'serverfix'
+                </code>
+                <p>If you already have a local branch and want to set it to a remote branch you just pulled down, or want to change the upstream branch you’re tracking, you can use the -u or <code>--set-upstream-to</code> option to git branch to explicitly set it at any time.</p>
+              </article>
+            </section>
+
+            <section class = "main-section" id = "pulling">
+              <header>
+                Pulling
+              </header>
+              <article>
+                <p>While <code>git fetch</code> will fetch all the changes on the server you don't have yet, it will not modify your working directory at all. It will just get the data for you and let you merge it yourself. However there is a command called <code>git pull</code> which is a <code>git fetch</code> followed by a <code>git merge</code> in most cases.</p>
+                <p>It is generally better to use the <code>fetch</code> followed by <code>merge</code> commands as <code>git pull</code> can be confusing.</p>
+              </article>
+            </section>
+
+            <section class = "main-section" id = "deleting_remote_branches">
+              <header>
+                Deleting Remote Branches
+              </header>
+              <article>
+                <p>Suppose you’re done with a remote branch — say you and your collaborators are finished with a feature and have merged it into your remote’s master branch (or whatever branch your stable codeline is in).</p>
+                <p>You can delete a remote branch using the <code>--delete</code> option to <code>git push</code>. If you want to delete your serverfix branch from the server, you run the following:</p>
+                <code>
+                  $ git push origin --delete serverfix
+                  To https://github.com/schacon/simplegit
+                   - [deleted]         serverfix
+                </code>
+              </article>
+            </section>
 
     </main>
   </body>
