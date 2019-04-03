@@ -240,6 +240,70 @@
           Basic Merge Conflicts
         </header>
         <article>
+          <p>If you changed the same part of the same file differently in the two branches you’re merging, Git won’t be able to merge them cleanly. If your fix for issue #53 modified the same part of a file as the hotfix branch, you’ll get a merge conflict that looks something like this:</p>
+          <code>
+            $ git merge iss53
+            Auto-merging index.html
+            CONFLICT (content): Merge conflict in index.html
+            Automatic merge failed; fix conflicts and then commit the result.
+          </code>
+          <p>
+            Anything that has merge conflicts and hasn’t been resolved is listed as unmerged. Git adds standard conflict-resolution markers to the files that have conflicts, so you can open them manually and resolve those conflicts. Your file contains a section that looks something like this:
+          </p>
+          <code>
+            <<<<<<< HEAD:index.html
+            <div id="footer">contact : email.support@github.com</div>
+            =======
+            <div id="footer">
+             please contact us at support@github.com
+            </div>
+            >>>>>>> iss53:index.html
+          </code>
+          <p>
+            This means the version in HEAD (your master branch, because that was what you had checked out when you ran your merge command) is the top part of that block (everything above the =======), while the version in your iss53 branch looks like everything in the bottom part. In order to resolve the conflict, you have to either choose one side or the other or merge the contents yourself.
+          </p>
+
+          <p>
+            After you’ve resolved each of these sections in each conflicted file, run git add on each file to mark it as resolved. Staging the file marks it as resolved in Git.
+          </p>
+
+          <p>
+            You can run git status again to verify that all conflicts have been resolved:
+          </p>
+          <code>
+            $ git status
+            On branch master
+            All conflicts fixed but you are still merging.
+              (use "git commit" to conclude merge)
+
+            Changes to be committed:
+
+                modified:   index.html
+          </code>
+          <p>
+          If you’re happy with that, and you verify that everything that had conflicts has been staged, you can type git commit to finalize the merge commit. The commit message by default looks something like this:</p>
+          <code>
+            Merge branch 'iss53'
+
+            Conflicts:
+                index.html
+            #
+            # It looks like you may be committing a merge.
+            # If this is not correct, please remove the file
+            #	.git/MERGE_HEAD
+            # and try again.
+
+
+            # Please enter the commit message for your changes. Lines starting
+            # with '#' will be ignored, and an empty message aborts the commit.
+            # On branch master
+            # All conflicts fixed but you are still merging.
+            #
+            # Changes to be committed:
+            #	modified:   index.html
+            #
+          </code>
+
         </article>
       </section>
 
