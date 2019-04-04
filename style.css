@@ -1,17 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+
+body{
+  font-family: 'Lato', sans-serif;
+  display: block;
+}
+
+header{
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 1.5em;
+}
+
+nav header {
+  font-size: 2.2em;
+  vertical-align: middle;
+}
+
+h3 {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+code {
+  background: #f4f4f4;
+  margin-bottom: 1.6em;
+  margin-left: 2em;
+  padding: 1em 1em;
+  word-wrap: break-word;
+  font-family: monospace;
+  max-width: 100%;
+  overflow: auto;
+  display: block;
+  white-space: pre-wrap;
+  text-align: left;
+  margin-right: 6em;
+}
+
+p code {
+    margin: 0em .3em;
+    padding: 0em;
+    display: inline;
+}
+
+p {
+  line-height: 1.5;
+  padding-left: .5em;
+  padding-right: 3em;
+  white-space: normal;
+}
+
+
+li {
+  line-height: 2;
+}
+
 #navbar {
   height: 100%;
-  width: 250px;
+  width: 300px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  zoom: 90%;
+  zoom: 76%;
+  border-color: grey;
+  border-width: .9px;
+  border-style: solid;
+  color: black;
 }
 #navbar a {
-  padding: 8px 8px 8px 32px;
+  padding: 11px 8px 11px 32px;
   display: block;
+  border-color: grey;
+  border-width: .9px;
+  border-style: solid;
+  text-decoration: none;
+  font-size: .8em;
+  color: black;
 }
 
 main {
-  margin-left: 250px;
+  margin-left: 300px;
 }
