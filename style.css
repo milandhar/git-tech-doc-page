@@ -13,9 +13,18 @@ header{
   margin-top: 1.5em;
 }
 
+img {
+  margin: 2em 1em;
+  max-width: 100%;
+  height: auto;
+}
+
 nav header {
   font-size: 2.2em;
-  vertical-align: middle;
+  text-align: center;
+  margin: 5px;
+  margin-right: 0px;
+  padding-left: 35px;
 }
 
 h3 {
@@ -58,12 +67,12 @@ li {
 
 #navbar {
   height: 100%;
-  width: 300px;
+  width: 355px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  zoom: 76%;
+  zoom: 80%;
   border-color: grey;
   border-width: .9px;
   border-style: solid;
@@ -76,10 +85,49 @@ li {
   border-width: .9px;
   border-style: solid;
   text-decoration: none;
-  font-size: .8em;
+  font-size: 1.2em;
   color: black;
+}
+
+nav ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+  height: 88%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@media only screen and (max-width: 815px){
+#navbar {
+  position: absolute;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-height: 270px;
+  border: none;
+  z-index: 1;
+  }
+
+  #main-doc {
+    position: relative;
+    margin-left: 0px;
+    margin-top: 270px;
+    overflow-x: hidden;
+  }
+
+
 }
 
 main {
   margin-left: 300px;
+  padding: 20px;
+}
+
+#intro_header{
+  margin-top: 10px;
 }

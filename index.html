@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-    <title>Git Technical Documentation Page</title>
+    <title>Git Technical Doc</title>
   </head>
   <body>
     <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"> </script>
@@ -11,18 +11,19 @@
       <header>
         Git Documentation
       </header>
-      <a class = "nav-link" href="#intro">Introduction</a>
-      <a class = "nav-link" href="#getting_repo">Getting a Git Repository</a>
-      <a class = "nav-link" href="#tracking_files">Tracking New Files</a>
-      <a class = "nav-link" href="#staging_files">Staging Modified Files</a>
-      <a class = "nav-link" href="#committing_changes">Committing Your Changes</a>
+      <ul>
+      <a class = "nav-link" href="#introduction">Introduction</a>
+      <a class = "nav-link" href="#Getting_a_Git_Repository">Getting a Git Repository</a>
+      <a class = "nav-link" href="#Tracking_New_Files">Tracking New Files</a>
+      <a class = "nav-link" href="#Staging_Modified_Files">Staging Modified Files</a>
+      <a class = "nav-link" href="#Committing_Your_Changes">Committing Your Changes</a>
       <a class = "nav-link" href="#removing_files">Removing Files</a>
       <a class = "nav-link" href="#moving_files">Moving Files</a>
       <a class = "nav-link" href="#undoing_things">Undoing Things</a>
-      <a class = "nav-link" href="#showing_remotes">Showing Your Remotes</a>
-      <a class = "nav-link" href="#fetching_pulling_from_remotes">Fetching and Pulling from Your Remotes</a>
-      <a class = "nav-link" href="#pushing_to_remotes">Pushing to Your Remotes</a>
-      <a class = "nav-link" href="#creating_new_branch">Creating a New Branch</a>
+      <a class = "nav-link" href="#showing_your_remotes">Showing Your Remotes</a>
+      <a class = "nav-link" href="#fetching_and_pulling_from_your_remotes">Fetching and Pulling from Your Remotes</a>
+      <a class = "nav-link" href="#pushing_to_your_remotes">Pushing to Your Remotes</a>
+      <a class = "nav-link" href="#creating_a_new_branch">Creating a New Branch</a>
       <a class = "nav-link" href="#switching_branches">Switching Branches</a>
       <a class = "nav-link" href="#basic_merging">Basic Merging</a>
       <a class = "nav-link" href="#basic_merge_conflicts">Basic Merge Conflicts</a>
@@ -32,10 +33,12 @@
       <a class = "nav-link" href="#tracking_branches">Tracking Branches</a>
       <a class = "nav-link" href="#pulling">Pulling</a>
       <a class = "nav-link" href="#deleting_remote_branches">Deleting Remote Branches</a>
+      <a class = "nav-link" href="#reference">Reference</a>
+      </ul>
     </nav>
     <main id = "main-doc">
-      <section class = "main-section" id = "intro">
-        <header>
+      <section class = "main-section" id = "introduction">
+        <header id = "intro_header">
           Introduction
         </header>
         <article>
@@ -69,7 +72,7 @@
           </article>
       </section>
 
-      <section class = "main-section" id = "getting_repo">
+      <section class = "main-section" id = "Getting_a_Git_Repository">
         <header>
           Getting a Git Repository
         </header>
@@ -93,7 +96,7 @@
         <h3>Cloning an Existing Repository</h3>
         <p>If you want to get a copy of an existing Git repository — for example, a project you’d like to contribute to — the command you need is <code>git clone &lt;url&gt;</code>.</p>
 
-        <section class = "main-section" id = "tracking_files">
+        <section class = "main-section" id = "Tracking_New_Files">
           <header>
           Tracking New Files
           </header>
@@ -113,7 +116,7 @@ Changes to be committed:
           </article>
         </section>
 
-        <section class = "main-section" id = "staging_files">
+        <section class = "main-section" id = "Staging_Modified_Files">
           <header>
             Staging Modified Files
           </header>
@@ -124,7 +127,7 @@ Changes to be committed:
           </article>
           </section>
 
-          <section class = "main-section" id = "committing_changes">
+          <section class = "main-section" id = "Committing_Your_Changes">
             <header>
               Committing Your Changes
             </header>
@@ -176,7 +179,7 @@ Changes to be committed:
         </article>
       </section>
 
-      <section class = "main-section" id = "showing_remotes">
+      <section class = "main-section" id = "showing_your_remotes">
         <header>
           Showing Your Remotes
         </header>
@@ -185,7 +188,7 @@ Changes to be committed:
         </article>
       </section>
 
-      <section class = "main-section" id = "fetching_pulling_from_remotes">
+      <section class = "main-section" id = "fetching_and_pulling_from_your_remotes">
         <header>
           Fetching and Pulling from Your Remotes
         </header>
@@ -198,7 +201,7 @@ Changes to be committed:
         </article>
       </section>
 
-      <section class = "main-section" id = "pushing_to_remotes">
+      <section class = "main-section" id = "pushing_to_your_remotes">
         <header>
           Pushing to Your Remotes
         </header>
@@ -208,7 +211,7 @@ Changes to be committed:
         </article>
       </section>
 
-      <section class = "main-section" id = "creating_new_branch">
+      <section class = "main-section" id = "creating_a_new_branch">
         <header>
           Creating a New Branch
         </header>
@@ -426,6 +429,17 @@ Changes to be committed:
   To https://github.com/schacon/simplegit
    - [deleted]         serverfix
                 </code>
+              </article>
+            </section>
+
+            <section class = "main-section" id = "reference">
+              <header>
+                Reference
+              </header>
+              <article>
+                <ul>
+                  <li>All the documentation in this page is taken from the <a href="https://git-scm.com/book/en/v2">Pro Git Book</a></li>
+                </ul>
               </article>
             </section>
 
